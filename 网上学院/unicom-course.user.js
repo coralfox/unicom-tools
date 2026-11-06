@@ -2,8 +2,8 @@
 // @name         联通网上学院-刷课程，可倍速（界面整理版）
 // @namespace    https://gitee.com/coralfox/unicom-tools
 // @version      3.8
-// @updateURL    https://gitee.com/coralfox/unicom-tools/raw/main/unicom-course.meta.js
-// @downloadURL  https://gitee.com/coralfox/unicom-tools/raw/main/unicom-course.user.js
+// @updateURL    https://gitee.com/coralfox/unicom-tools/raw/main/%E7%BD%91%E4%B8%8A%E5%AD%A6%E9%99%A2/unicom-course.meta.js
+// @downloadURL  https://gitee.com/coralfox/unicom-tools/raw/main/%E7%BD%91%E4%B8%8A%E5%AD%A6%E9%99%A2/unicom-course.user.js
 // @supportURL   https://gitee.com/coralfox/unicom-tools
 // @description  联通网上学院刷课程视频。仅在“主题专栏”内页与课程播放页生效（/training/pc/ 下），其余页面不注入。[界面整理：紧凑布局一屏放下、直接读取网站分页自动识别当前页、完整/迷你/隐藏三种形态、分区折叠、运行日志默认收起、位置记忆、按钮与参数均有说明] [油猴菜单：显示/隐藏面板、完整/迷你切换、三种刷课模式切换、全部学习、使用说明] [功能整理：默认勾选未学完课程；“全部学习”与“开始刷课”并排，点击先弹确认框；获取课程期间自动禁用按钮避免误操作]
 // @author       ZouYs,coralfox,CountZero

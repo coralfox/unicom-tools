@@ -6,7 +6,7 @@
 // @author       CountZero
 // @connect      app.campus.chinaunicom.cn
 // @connect      campus.chinaunicom.cn
-// @scriptUrl    https://gitee.com/coralfox/unicom-tools/raw/main/unicom-course.user.js
+// @scriptUrl    https://gitee.com/coralfox/unicom-tools/raw/main/%E7%BD%91%E4%B8%8A%E5%AD%A6%E9%99%A2/unicom-course.user.js
 // ==/UserSubscribe==
 
 /*
