@@ -33,8 +33,8 @@
  *    - 只有 @connect 发生改变时，才会重新弹窗让用户确认权限。
  *
  * 4. Gitee 仓库里应该放哪些文件（全部放仓库根目录）
- *    unicom-course.user.js        正式脚本（含 @updateURL / @downloadURL）
- *    unicom-course.meta.js        仅头信息，供更新检查用（体积小，比拉整包快）
+ *    unicom-course.user.js        正式脚本（仓库里的开发版不带更新地址，发布产物由 build-release.js 注入）
+ *    不使用 meta.js                @updateURL / @downloadURL 都指向 .user.js 自身
  *    unicom-course.user.sub.js    本订阅文件（即当前这个文件）
  *    README.md                    可选，写安装说明
  *
