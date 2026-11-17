@@ -1,14 +1,15 @@
 ﻿// ==UserScript==
 // @name         联通网上学院-刷课程，可倍速
-// @namespace    https://gitee.com/zouyongs/js-liantongdangxiao
-// @version      3.7
+// @namespace    https://gitee.com/coralfox/unicom-tools
+// @version      3.9
 // @description  联通网上学院刷课程视频。仅在“主题专栏”内页与课程播放页生效（/training/pc/ 下），其余页面不注入。[界面整理：紧凑布局一屏放下、直接读取网站分页自动识别当前页、完整/迷你/隐藏三种形态、分区折叠、运行日志默认收起、位置记忆、按钮与参数均有说明] [油猴菜单：显示/隐藏面板、完整/迷你切换、三种刷课模式切换、全部学习、使用说明] [功能整理：默认勾选未学完课程；“全部学习”与“开始刷课”并排，点击先弹确认框；获取课程期间自动禁用按钮避免误操作]
 // @author       ZouYs,coralfox,CountZero
 // @match        https://campus.chinaunicom.cn/training/pc/*
 // @match        https://m.campus.chinaunicom.cn/training/pc/*
-// @icon         data:image/x-icon;base64,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5f8nAOXpJwDlmicA5dMnAOXbJwDlfCcA5dMnAOX/JwDl/ycA5f8nAOX/JwDl/ycA5bonAOUdJwDlwycA5f8nAOX+JwDlvScA5aEnAOXsJwDl/ycA5f8nAOX+JwDl/ycA5ewnAOVSJwDlhycA5fgnAOX/JwDl/ScA5f8nAOX/JwDl6ScA5WInAOWSJwDl/ycA5f8nAOX9JwDl/ycA5f8nAOXWJwDllicA5d8nAOX/JwDl+ycA5XMnAOX3JwDl/ycA5eMnAOUxJwDlAicA5WonAOX2JwDl/ycA5f8nAOX9JwDlgScA5QYnAOULJwDlmicA5f8nAOX/JwDl/ycA5fInAOVlJwDlACcA5SMnAOXHJwDl/ycA5f8nAOX/JwDl2icA5TsnAOUAJwDlcycA5f4nAOX/JwDloCcA5fQnAOX/JwDl6ScA5UQnAOUVJwDljScA5fsnAOX/JwDl/ycA5f4nAOWjJwDlFCcA5R8nAOW4JwDl/ycA5f8nAOX/JwDl9ycA5XYnAOUFJwDlQScA5dsnAOX/JwDl/ycA5f8nAOXiJwDlUScA5Q8nAOWHJwDl/ycA5f8nAOWcJwDltCcA5f8nAOX/JwDl3icA5c8nAOX6JwDl/ycA5fcnAOXyJwDl/ycA5e8nAOVuJwDlsycA5f8nAOX/JwDl8CcA5fonAOX/JwDl8ycA5XgnAOWUJwDl/ycA5f8nAOXvJwDl/ScA5f8nAOXrJwDlyicA5fAnAOX/JwDl8ycA5WAnAOU+JwDl1ScA5f8nAOX/JwDl/ycA5f8nAOXyJwDldycA5WUnAOXcJwDloycA5b8nAOX/JwDl/ycA5d0nAOVXJwDliicA5fknAOX/JwDl8icA5ZEnAOWxJwDluicA5UgnAOWzJwDl/ycA5f8nAOX/JwDl/ycA5f4nAOWcJwDlECcA5QAnAOU5JwDlpScA5dMnAOXZJwDlvCcA5VsnAOUGJwDlAScA5U8nAOXAJwDl/ycA5f8nAOXdJwDlTCcA5QAnAOUMJwDljScA5fgnAOX/JwDl8ScA5Y8nAOUoJwDlACcA5RwnAOWGJwDlyicA5donAOXIJwDlficA5RUnAOUAJwDlACcA5QAnAOUFJwDlHicA5SQnAOUPJwDlACcA5QAnAOUgJwDlsicA5f8nAOX/JwDl2ycA5YYnAOWAJwDlGCcA5UAnAOWbJwDlpicA5fgnAOX/JwDl+CcA5YYnAOUJJwDlACcA5QAnAOUWJwDlJicA5RQnAOUAJwDlACcA5QAAAAAAJwDlACcA5QAnAOUAJwDlACcA5QAnAOUAJwDlCCcA5ZwnAOX/JwDl/ycA5dwnAOWBJwDl0CcA5f0nAOW4JwDl2CcA5f8nAOW5JwDloicA5fgnAOX/JwDl9CcA5VgnAOUAJwDlACcA5QAnAOUAJwDlACcA5QAnAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcA5QAnAOUsJwDl5icA5f8nAOXjJwDlSicA5U0nAOXoJwDl/ycA5f8nAOX/JwDl/ycA5csnAOUyJwDliScA5fonAOX/JwDlqycA5QonAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5UgnAOXxJwDl/ycA5a0nAOUAJwDlAScA5YsnAOX+JwDl/ycA5f8nAOXvJwDlUycA5QAnAOUlJwDl2ycA5f8nAOXIJwDlEycA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAOUAJwDlMicA5eonAOX/JwDl1icA5U0nAOVXJwDl1ScA5f8nAOX/JwDl/ycA5fwnAOWzJwDlPycA5XgnAOX0JwDl/ycA5bUnAOUNJwDlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcA5QAnAOUOJwDlsicA5f8nAOX/JwDl8CcA5fMnAOX/JwDl/ycA5dQnAOXqJwDl/ycA5f4nAOXsJwDl9ycA5f8nAOX7JwDlbScA5QAnAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5QAnAOU1JwDlyScA5f8nAOX/JwDl/ycA5f4nAOW7JwDlLScA5V4nAOXhJwDl/ycA5f8nAOX/JwDl+CcA5ZonAOURJwDlACcA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAOUAJwDlACcA5QAnAOUjJwDldycA5a8nAOWqJwDlbicA5RsnAOUAJwDlAScA5TcnAOWLJwDlsycA5aEnAOVdJwDlDicA5QAnAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAOUAJwDlACcA5QAnAOUAJwDlAScA5QEnAOUAJwDlACcA5QAnAOUAJwDlACcA5QAnAOUBJwDlACcA5QAnAOUAJwDlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////gQH//gAAf/wAAH/8AAA//AAAP/wAAD/8AAA//AAAPwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAfwAAD/8AAA//AAAP/wAAD/8AAA//AAAf/4AAP////////////////8=
+// @icon         data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5QAnAOUAJwDlACcA5QAnAOUAAAAAACcA5QAnAOUAJwDlACcA5QAnAOUAJwDlACcA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5QAnAOUAJwDlBScA5RonAOUXJwDlAycA5QAnAOUAJwDlACcA5QAnAOUKJwDlHicA5RQnAOUBJwDlACcA5QAnAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcA5QAnAOUAJwDlAicA5UInAOWmJwDlzycA5cwnAOWeJwDlOCcA5QAnAOUJJwDlXCcA5bcnAOXTJwDlyicA5Y0nAOUgJwDlACcA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5QAnAOVQJwDl5ScA5f8nAOX/JwDl/ycA5f8nAOXcJwDlVScA5YAnAOX1JwDl/ycA5f8nAOX/JwDl/ycA5bwnAOUiJwDlACcA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAOUAJwDlEycA5cInAOX/JwDl/ScA5eEnAOXjJwDl/icA5f8nAOXvJwDl9ycA5f8nAOX6JwDl2icA5esnAOX/JwDl/ycA5YAnAOUCJwDlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcA5QAnAOU7JwDl7ScA5f8nAOXKJwDlKCcA5S0nAOW4JwDl/ycA5f8nAOX/JwDl+icA5YwnAOUYJwDlVCcA5e4nAOX/JwDlvicA5RAnAOUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwDlACcA5UQnAOXwJwDl/ycA5bQnAOUGJwDlDCcA5ZonAOX/JwDl/ycA5f8nAOXwJwDlVycA5QAnAOUsJwDl4icA5f8nAOXIJwDlEycA5QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAOUAJwDlIScA5dsnAOX/JwDl8ycA5XMnAOVqJwDl9ycA5f8nAOX/JwDl/ycA5f8nAOXRJwDlOycA5aAnAOX+JwDl/ycA5Z0nAOUGJwDlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcA5QAnAOUAJwDlACcA5QAnAOUAJwDlACcA5QAnAOUEJwDlfCcA5fonAOX/JwDl8icA5Z4nAOXGJwDl9ycA5ZonAOW5JwDl8icA5aMnAOW1JwDl/CcA5f8nAOXlJwDlQicA5QAnAOUAJwDlACcA5QAnAOUAJwDlACcA5QAAAA... (line truncated to 2000 chars)
 // @require      https://cdn.jsdelivr.net/npm/jsencrypt@2.3.1/bin/jsencrypt.min.js
 // @require      https://fastly.jsdelivr.net/npm/jsencrypt@2.3.1/bin/jsencrypt.min.js
+// @connect      campus.chinaunicom.cn
 // @connect      app.campus.chinaunicom.cn
 // @grant        unsafeWindow
 // @grant        GM_xmlhttpRequest
@@ -426,7 +427,7 @@
   }
 
   function showLog(info, color, lock) {
-    var text = info == null ? "" : String(info);
+    var text = info === null || info === undefined ? "" : String(info);
     var cssColor = COLOR_MAP[color] || color || "#333";
     var waitInfo = document.getElementById("waitInfo");
     if (waitInfo) {
@@ -536,25 +537,48 @@
     return (query && query.split("=")[1]) || "";
   }
 
+  // ==================== 共用 UI 片段 ====================
+  // 单课程页与专栏页的这三个分区文案一致，只有 radio 的 name 不同
+  function modeSectionHTML(radioName) {
+    return '<div class="ldx-sec">' +
+      '<div class="ldx-sec-head"><span>刷课模式</span><i class="ldx-caret">▾</i></div>' +
+      '<div class="ldx-sec-body">' +
+        '<div class="ldx-row ldx-modes">' +
+          '<label title="逐章串行提交，最稳定">' +
+            '<input type="radio" name="' + radioName + '" value="serial" checked>非并发</label>' +
+          '<label title="分批并发提交，失败自动重试">' +
+            '<input type="radio" name="' + radioName + '" value="concurrent">并发</label>' +
+          '<label title="多批并行，速度最快">' +
+            '<input type="radio" name="' + radioName + '" value="aggressive">激进</label>' +
+          '<label class="ldx-field" title="睡眠时间：每门课程之间的等待秒数">' +
+            '睡眠<input id="sleeptime" type="number" min="1" step="1" value="1">秒</label>' +
+        '</div>' +
+        '<div id="mode-desc" class="ldx-hint"></div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // 进度条 + 状态文字
+  function progressSectionHTML() {
+    return '<div class="ldx-bar"><div id="myProgress"></div></div>' +
+      '<div class="ldx-row" style="margin:2px 0 4px;">' +
+        '<span id="waitInfo" class="ldx-status">正在准备…</span>' +
+        '<span id="progrssNum" class="ldx-bar-num">0%</span>' +
+      '</div>';
+  }
+
+  // 运行日志分区（默认收起，开始刷课时自动展开）
+  function logSectionHTML() {
+    return '<div class="ldx-sec collapsed">' +
+      '<div class="ldx-sec-head"><span>运行日志</span><i class="ldx-caret">▾</i></div>' +
+      '<div class="ldx-sec-body"><div id="ldx-log" class="ldx-log"></div></div>' +
+    '</div>';
+  }
+
   // ==================== 单课程页面 UI ====================
   function renderSingleCourseUI(courseId) {
     var body =
-      '<div class="ldx-sec">' +
-        '<div class="ldx-sec-head"><span>刷课模式</span><i class="ldx-caret">▾</i></div>' +
-        '<div class="ldx-sec-body">' +
-          '<div class="ldx-row ldx-modes">' +
-            '<label title="逐章提交，最稳定">' +
-              '<input type="radio" name="singleBrushMode" value="serial" checked>非并发</label>' +
-            '<label title="分批并发提交，失败自动重试">' +
-              '<input type="radio" name="singleBrushMode" value="concurrent">并发</label>' +
-            '<label title="多批并行，速度最快">' +
-              '<input type="radio" name="singleBrushMode" value="aggressive">激进</label>' +
-            '<label class="ldx-field" title="每门课之间的等待秒数，建议不小于 1 秒">' +
-              '睡眠<input id="sleeptime" type="number" min="1" step="1" value="1">秒</label>' +
-          '</div>' +
-          '<div id="mode-desc" class="ldx-hint"></div>' +
-        '</div>' +
-      '</div>' +
+      modeSectionHTML("singleBrushMode") +
       '<div class="ldx-sec">' +
         '<div class="ldx-sec-head"><span>开始与进度</span><i class="ldx-caret">▾</i></div>' +
         '<div class="ldx-sec-body">' +
@@ -564,17 +588,10 @@
             '<button id="btn-help" class="ldx-btn ldx-btn-plain" ' +
               'title="查看按钮与参数说明">使用说明</button>' +
           '</div>' +
-          '<div class="ldx-bar"><div id="myProgress"></div></div>' +
-          '<div class="ldx-row" style="margin:2px 0 4px;">' +
-            '<span id="waitInfo" class="ldx-status">正在准备…</span>' +
-            '<span id="progrssNum" class="ldx-bar-num">0%</span>' +
-          '</div>' +
+          progressSectionHTML() +
         '</div>' +
       '</div>' +
-      '<div class="ldx-sec collapsed">' +
-        '<div class="ldx-sec-head"><span>运行日志</span><i class="ldx-caret">▾</i></div>' +
-        '<div class="ldx-sec-body"><div id="ldx-log" class="ldx-log"></div></div>' +
-      '</div>';
+      logSectionHTML();
 
     buildPanel("联通网上学院助手 · 单课程", 300, body, "single");
     bindModeDesc();
@@ -658,22 +675,7 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="ldx-sec">' +
-        '<div class="ldx-sec-head"><span>刷课模式</span><i class="ldx-caret">▾</i></div>' +
-        '<div class="ldx-sec-body">' +
-          '<div class="ldx-row ldx-modes">' +
-            '<label title="逐章串行提交，最稳定">' +
-              '<input type="radio" name="brushMode" value="serial" checked>非并发</label>' +
-            '<label title="分批并发提交，失败自动重试">' +
-              '<input type="radio" name="brushMode" value="concurrent">并发</label>' +
-            '<label title="多批并行，速度最快">' +
-              '<input type="radio" name="brushMode" value="aggressive">激进</label>' +
-            '<label class="ldx-field" title="睡眠时间：非并发模式下每门课程之间的等待秒数">' +
-              '睡眠<input id="sleeptime" type="number" min="1" step="1" value="1">秒</label>' +
-          '</div>' +
-          '<div id="mode-desc" class="ldx-hint"></div>' +
-        '</div>' +
-      '</div>' +
+      modeSectionHTML("brushMode") +
       '<div class="ldx-sec">' +
         '<div class="ldx-sec-head"><span>开始与进度</span><i class="ldx-caret">▾</i></div>' +
         '<div class="ldx-sec-body">' +
@@ -685,17 +687,10 @@
             '<button id="btn-help" class="ldx-btn ldx-btn-plain" ' +
               'title="查看按钮与参数说明">使用说明</button>' +
           '</div>' +
-          '<div class="ldx-bar"><div id="myProgress"></div></div>' +
-          '<div class="ldx-row" style="margin:2px 0 4px;">' +
-            '<span id="waitInfo" class="ldx-status">正在准备…</span>' +
-            '<span id="progrssNum" class="ldx-bar-num">0%</span>' +
-          '</div>' +
+          progressSectionHTML() +
         '</div>' +
       '</div>' +
-      '<div class="ldx-sec collapsed">' +
-        '<div class="ldx-sec-head"><span>运行日志</span><i class="ldx-caret">▾</i></div>' +
-        '<div class="ldx-sec-body"><div id="ldx-log" class="ldx-log"></div></div>' +
-      '</div>';
+      logSectionHTML();
 
     buildPanel("联通网上学院助手", 330, body, "topic");
     bindModeDesc();
@@ -962,12 +957,6 @@
     }
   }
 
-  // 读取网站分页里高亮的页码：<li class="number active">2</li>
-  // 统一走 readActivePage()：它会先定位课程列表自己的分页条，避免被页面上其它列表的分页干扰
-  function getPageNumberFromDOM() {
-    return readActivePage();
-  }
-
   // 读取页面上已显示（非隐藏占位）的课程标题
   function getVisibleCourseTitles() {
     var titles = [];
@@ -1006,7 +995,7 @@
       pageSize: API_PAGE_SIZE,
       total: 0,
     };
-    return await request(url.courseList, encryptData(params, false));
+    return await request(url.courseList, encryptData(params));
   }
 
   // 统计某一接口页里有多少课程正显示在页面上
@@ -1047,7 +1036,7 @@
   // 校验反而会在网站列表尚未刷新完成时误判，被错误地带到别的页。
   async function detectCurrentPage() {
     await waitForSiteList(3000);
-    var domPage = getPageNumberFromDOM();
+    var domPage = readActivePage();
     if (domPage > 0) {
       return { page: domPage, matched: getVisibleCourseTitles().length, fromDom: true };
     }
@@ -1296,8 +1285,6 @@
     helpPanel.querySelector("#ldx-help-body").innerHTML = helpBodyHTML(helpKind);
     helpPanel.style.display = "flex";
   }
-
-
 
   // ———————————————————— 以下为通用核心函数，两个UI模式共用 ————————————————————
 
@@ -2155,27 +2142,18 @@
   );
  });
 
- // let cur_url = window.location.href.split('?')
- // var id = cur_url[1];
- // var token = document.cookie.split('token=')[1].split(';')[0]
- // var timestamp=Math.floor(Date.now() / 1000);
- // var companyId=window.localStorage.getItem("companyId") || 0
- // var organizationId=window.localStorage.getItem("organizationId") || 0
- // var from='WEB'
- // var randomStr= randomStrFuc()
  var publicKey =
  "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAooxomrujIP9vcxxNmS+Q1xxnaoxAfluwFvDR3+G+p84QMsePXDD67cLjJ+7n+79u2xoG7fVvDnzHDW+X5D/0/Dv9ajUaBpFQl3jqKwRiP3Lrx08seYzWIWDGHEjurbZrWGHRJNdoM7tEQPdPZftZC6iOm7kSjDIDiuqaIh9g3hqFSVQ5r15Dvae6qtREo1nDWKsf3tH6nkvVD2pIh3TBJUoGdfbPqnw/tNvzhwOX9tg7NjhZ8Yet1ctVt297G5HCwPSIBjhUKEtLYLk/8scPrzXnQpAU05m5WnHfDhfvvG2xoVXckveNvZhv6lvxTZqRkUBOI1pU16U9Tz4aDpCU7QIDAQAB";
  //加密参数并序列化、字符串化参数
  //返回对象，包含字符串参数和sign
 
- /**
-  * 最重要的地方，破解sign参数
-  * @param {*} e
-  * @param {*} smp
-  * @returns
-  */
+  /**
+   * 参数序列化 + 签名：key = 参数串的 MD5，sign = RSA(key) 后 URL 编码
+   * @param {Object} e 待签名参数对象
+   * @returns {{serString: string, sign: string}}
+   */
  //加密参数，返回包装数据，便于在接口中直接调用
- function encryptData(e, smp = true) {
+ function encryptData(e) {
    var t,
  c = "",
  r = Object.keys(e).sort();
@@ -2183,21 +2161,15 @@
    var o = e[r[t]];
    null != o && (c += r[t] + "=" + o + "&");
  }
- if (smp) {
-   console.log("字符串参数: " + c);
- }
  var key_md5 = new Md5(!0).update(c)["hex"]();
- if (smp) {
-   console.log("key_md5: " + key_md5);
+ return { serString: c, sign: encodeURIComponent(encrypt(key_md5)) };
  }
- return { serString: c, sign: encodeURIComponent(encrypt(key_md5, smp)) };
- }
- //加密，获得sign
- function encrypt(key, smp = true) {
+ // RSA 加密，得到 sign
+ function encrypt(key) {
    var rsa = new JSEncrypt();
    rsa.setPublicKey(publicKey);
    var encryptedData = rsa.encrypt(key);
-   if (smp) {
+   if (P_DEBUG) {
      console.log("sign: " + encryptedData);
    }
    return encryptedData;
@@ -2220,17 +2192,13 @@
  async function statistics() {
    let count = 0;
    for (let ll of cList) {
-     await getCourseInfo(ll.id, false).then((v) => {
+     await getCourseInfo(ll.id).then((v) => {
        ll.child = v || [];
        count += ll.child.length;
      });
    }
    return count;
  }
- /**
-  * @description: 开始按钮事件处理函数
-  * @return {*}
-  */
   // ========== 共享可调参数 — 在此修改 ==========
   var P_BATCH_SIZE = 5;           // 每批并发数（同一时刻最多发几个视频的请求）
   var P_INTER_BATCH_MS = 1000;    // 批次间间隔（毫秒），并发策略每批发完后暂停；激进策略每个batch错峰启动间隔
@@ -2239,6 +2207,7 @@
   var P_MAX_STUDY = 179;          // 单次最大学习时长（秒），超过此值服务端拒绝
   var P_MAX_RETRIES = 5;          // 单个视频最多失败的轮次数（跨轮重试上限）
   var P_RETRY_PER_REQ = 1;        // 单次请求失败后的网络重试次数（传给useGMxmlhttpRequest）
+  var P_DEBUG = false;            // 调试开关：是否在控制台打印 sign 与请求地址（默认关闭）
   // ===============================================
 
   // ================== 模式一：非并发（原版逐章串行） ==================
@@ -2252,12 +2221,10 @@
         llList++;
         kk.courseId = courseId;
         console.log("[非并发] 正在处理 kpointId：" + kk.id);
-        const sleepTimeInput = document.getElementById("sleeptime");
-        const sleepDuration = sleepTimeInput ? sleepTimeInput.value * 1000 : 1000;
-        await sleep(sleepDuration);
+        await sleep(getSleepMs());
         let pgr = Math.round((llList / aCount) * 100);
-        let v = await studyCourse(kk, pgr);
-        if (v == 0) return 0;
+        let v = await studyCourse(kk);
+        if (v === 0) return 0;
         setProgress(pgr);
       }
     }
@@ -2275,7 +2242,6 @@
       return 1;
     }
     console.log("[并发策略] 共 " + totalTasks + " 个视频待处理 (批大小=" + P_BATCH_SIZE + ", 批间隔=" + P_INTER_BATCH_MS + "ms, 轮间隔=" + P_ROUND_SLEEP_MS + "ms)");
-
     var round = 0;
     var active = tasks.slice();
 
@@ -2291,14 +2257,7 @@
         if (P_INTER_BATCH_MS > 0) await sleep(P_INTER_BATCH_MS);
 
         await Promise.allSettled(batch.map(function (task) {
-          var thisRoundTime;
-          if (task.totalTime - task.accumulatedTime > P_MAX_STUDY) {
-            thisRoundTime = P_MAX_STUDY;
-          } else {
-            thisRoundTime = task.totalTime - task.accumulatedTime;
-          }
-          var newAccumulated = task.accumulatedTime + thisRoundTime;
-          return sendOneRequest(task, newAccumulated);
+          return submitTask(task);
         }));
       }
 
@@ -2365,14 +2324,7 @@
           var roundStartTime = Date.now();
 
           await Promise.allSettled(pending.map(function (task) {
-            var thisRoundTime;
-            if (task.totalTime - task.accumulatedTime > P_MAX_STUDY) {
-              thisRoundTime = P_MAX_STUDY;
-            } else {
-              thisRoundTime = task.totalTime - task.accumulatedTime;
-            }
-            var newAccumulated = task.accumulatedTime + thisRoundTime;
-            return sendOneRequest(task, newAccumulated);
+            return submitTask(task);
           }));
 
           updateProgress();
@@ -2400,6 +2352,27 @@
   }
 
   // ================== 共用辅助函数 ==================
+  // 读取面板「睡眠」设置（秒）并转成毫秒；缺省或非法值统一按 1 秒处理
+  function getSleepMs() {
+    var input = document.getElementById("sleeptime");
+    var sec = input ? Number(input.value) : 1;
+    return (isFinite(sec) && sec > 0 ? sec : 1) * 1000;
+  }
+
+  // 统一的请求失败提示：控制台留详细堆栈，面板只说一句可操作的话，返回 0 供调用方直接 return
+  function logFail(err) {
+    console.error(err);
+    var msg = err && err.message ? err.message : String(err);
+    showLog(msg + "---请刷新页面重试---持续出现，请反馈！", "red", false);
+    return 0;
+  }
+
+  // 计算本轮应提交的累计学习时长（单次最多 P_MAX_STUDY 秒），并发出提交请求
+  function submitTask(task) {
+    var remain = task.totalTime - task.accumulatedTime;
+    var thisRoundTime = remain > P_MAX_STUDY ? P_MAX_STUDY : remain;
+    return sendOneRequest(task, task.accumulatedTime + thisRoundTime);
+  }
 
   function flattenCourseList(list) {
     var tasks = [];
@@ -2431,7 +2404,7 @@
   function sendOneRequest(task, newAccumulated) {
     var study = {
       accrualType: 0,
-      token: document.cookie.split("token=")[1].split(";")[0],
+      token: getToken(),
       timestamp: Math.floor(Date.now() / 1000),
       companyId: window.localStorage.getItem("companyId") || 0,
       from: "WEB",
@@ -2603,9 +2576,7 @@
       return slicedCourses;
 
     } catch (error) {
-      console.error(error);
-      showLog(error.message + "---请刷新页面重试---持续出现，请反馈！", "red", false);
-      return 0;
+      return logFail(error);
     }
   }
  async function sleep(time) {
@@ -2619,43 +2590,30 @@
   * @param {*} id
   * @return {*}
   */
- async function getCourseInfo(id, smp = true) {
+ async function getCourseInfo(id) {
    var signleCourse = {
-     token: document.cookie.split("token=")[1].split(";")[0],
- timestamp: Math.floor(Date.now() / 1000),
- companyId: window.localStorage.getItem("companyId") || 0,
- from: "WEB",
- organizationId: window.localStorage.getItem("organizationId") || 0,
- randomStr: randomStrFuc(),
- courseId: id,
+     token: getToken(),
+     timestamp: Math.floor(Date.now() / 1000),
+     companyId: window.localStorage.getItem("companyId") || 0,
+     from: "WEB",
+     organizationId: window.localStorage.getItem("organizationId") || 0,
+     randomStr: randomStrFuc(),
+     courseId: id,
    };
    var courseInfo;
    let data;
    //发送请求
    try {
-     data = await request(
-       url.courseInfo,
-       encryptData(signleCourse, smp),
-                          smp
-     );
-     if (smp) {
-       console.log(data.entity.kpointList); // 这里打印获取的数据
-     }
+     data = await request(url.courseInfo, encryptData(signleCourse));
      courseInfo = data.entity.kpointList;
    } catch (err) {
-     console.error(err);
-     showLog(
-       err.message + "---请刷新页面重试---持续出现，请反馈！",
-       "red",
-       false
-     );
-     return 0;
+     return logFail(err);
    }
    return courseInfo;
  }
 
  //更改课程学习时间
- async function studyCourse(courseNode, pgr = 0) {
+ async function studyCourse(courseNode) {
    try {
      // 首先确定需要处理的视频列表。
      // 如果courseNode有childKpointList，则处理该列表；否则，创建一个只包含courseNode自身的列表。
@@ -2672,8 +2630,7 @@
 
      // 遍历所有需要处理的视频。
      for (const videoNode of videosToProcess) {
-       let maxStudyTime = 180; // 每次最大学习时长（秒）
-       let singleStudyTime = maxStudyTime - 1; // 设置为99秒
+       const singleStudyTime = P_MAX_STUDY; // 单次提交的学习时长（秒）
        let courseTotalTime = parseTimeString(videoNode.time) || 0;
 
        // 如果视频总时长为0，则跳过此视频。
@@ -2698,20 +2655,19 @@
          console.log(`视频 "${videoNode.name}" 已学 ${alreadyDone}% (${courseTimeCache}s/${courseTotalTime}s)，从断点继续。`);
        }
 
-
        var study = {
          accrualType: 0,
- token: document.cookie.split("token=")[1].split(";")[0],
- timestamp: Math.floor(Date.now() / 1000),
- companyId: window.localStorage.getItem("companyId") || 0,
- from: "WEB",
- organizationId: window.localStorage.getItem("organizationId") || 0,
- randomStr: randomStrFuc(),
- type: "playback",
- kpointId: videoNode.id, // 使用当前视频的ID
- courseId: parentCourseId, // 使用父课程的ID
- breakpoint: 0,
- studyTime: 0,
+         token: getToken(),
+         timestamp: Math.floor(Date.now() / 1000),
+         companyId: window.localStorage.getItem("companyId") || 0,
+         from: "WEB",
+         organizationId: window.localStorage.getItem("organizationId") || 0,
+         randomStr: randomStrFuc(),
+         type: "playback",
+         kpointId: videoNode.id, // 使用当前视频的ID
+         courseId: parentCourseId, // 使用父课程的ID
+         breakpoint: 0,
+         studyTime: 0,
        };
        console.log(`正在处理视频: "${videoNode.name}", 总时长: ${courseTotalTime}s`);
        do {
@@ -2730,7 +2686,7 @@
            url.studyCourse,
            encryptData(study)
          );
-         await sleep(32000);
+         await sleep(P_ROUND_SLEEP_MS);
 
          // 如果API返回100（表示完成），则提前结束循环。
          if (res.entity === 100) {
@@ -2743,25 +2699,18 @@
        } while (courseTimeCache < courseTotalTime);
        // 如果一个课程节点包含多个视频，在处理完一个后稍作等待。
        if (videosToProcess.length > 1) {
-         const sleepTimeInput = document.getElementById("sleeptime");
-         const sleepDuration = sleepTimeInput ? sleepTimeInput.value * 1000 : 1000;
-         await sleep(sleepDuration || 1000);
+         await sleep(getSleepMs());
        }
      } // 视频遍历结束
 
      return 1; // 表示整个 courseNode (包括其所有子视频) 都成功处理
 
    } catch (err) {
-     showLog(
-       err.message + "---请刷新页面重试---持续出现，请反馈！",
-       "red",
-       false
-     );
-     return 0; // 表示处理失败
+     return logFail(err); // 表示处理失败
    }
  }
- async function request(url, e, smp = true) {
-   if (smp) {
+ async function request(url, e) {
+   if (P_DEBUG) {
      console.log("正在发送请求->url:" + url);
    }
    return fetch(url + "?" + e.serString + "sign=" + e.sign, {
@@ -2784,7 +2733,7 @@
      credentials: "omit",
    }).then(async (v) => {
      v = await v.json();
-     if (v.success && v.code == 200) {
+     if (v.success && v.code === 200) {
        return v;
      } else {
        throw Error("请求错误！" + v.message);
@@ -2818,7 +2767,7 @@
         onload: function (res) {
           try {
             var obj = JSON.parse(res.response);
-            if (obj.success && obj.code == 200) {
+            if (obj.success && obj.code === 200) {
               resolve(obj);
             } else {
               reject(new Error(obj.message || ("code=" + obj.code)));

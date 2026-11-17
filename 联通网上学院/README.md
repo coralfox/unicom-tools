@@ -14,7 +14,7 @@
 ### 脚本猫（推荐）
 
 1. **装扩展**：从官网 `https://scriptcat.org` 下载对应浏览器的 `.crx` / `.zip`，开浏览器「开发者模式」后拖入扩展管理页；Edge 也可在「Edge 加载项」里搜 ScriptCat，搜不到就用官网的包。Chrome 网上应用店在国内打不开，不用指望从那里装。
-2. **装脚本**：打开脚本猫管理面板 → 「添加新脚本」，把 `unicom-course.user.js` 全文粘进去保存；也可以直接把 `.user.js` 文件拖进浏览器窗口，脚本猫会弹出安装确认。
+2. **装脚本**：打开脚本猫管理面板 → 「添加新脚本」，把 `unicom-course.user.js` 全文粘进去保存；也可以直接把 `.user.js` 文件拖进浏览器窗口，脚本猫会弹出安装确认。也可以直接搜索联通网上学院,直接安装。
 3. **允许跨域**：首次请求 `campus.chinaunicom.cn` / `app.campus.chinaunicom.cn` 时脚本猫会弹授权，点「**总是允许**」。
 
 脚本猫兼容 Tampermonkey 的 `GM_*` 接口，本脚本用到的 `unsafeWindow`、`GM_xmlhttpRequest`、`GM_getValue` / `GM_setValue` / `GM_deleteValue`、`GM_registerMenuCommand` 均支持，功能与油猴一致，菜单命令也一样出现在脚本猫的脚本菜单里。
@@ -80,7 +80,7 @@
 
 ---
 
-**PDF / HTML 教程 & 插件（适合直接发给不懂的同事图文对照学习，以及特殊网络离线安装）**
+**HTML 教程 & 插件（适合直接发给不懂的同事图文对照学习，以及特殊网络离线安装）**
 
 `https://coralfox.lanzouo.com/b0uktcq7a` 密码: 1234
 
@@ -92,18 +92,7 @@
 
 | 位置 | 内容 |
 | --- | --- |
-| `unicom-course.user.js` / `.user.sub.js` | 当前 3.8 开发版主脚本、订阅文件 |
-| `联通网上学院-刷课程，可倍速(开发版).txt` / `(稳定版).txt` | 分发用文本副本：开发线 3.7、稳定线 2.48 |
+| `unicom-course.user.js` / `.user.sub.js` | 当前 3.9 开发版主脚本、订阅文件 |
+| `联通网上学院-刷课程，可倍速(开发版).txt` / `(稳定版).txt` | 分发用文本副本：开发线 3.9、稳定线 2.48 |
 | `历史版本/` | `联通网上学院-刷课程_v3.7.user.js`、`联通党校刷课-dev_v2.44.js`（同一脚本的前代实现，早期名为「联通党校-刷课程」） |
-| `第三方参考/` | 他人实现的 `【联通】党校视频学时加速提交_v0.0.6.js`，实现独立，不参与本脚本版本演进 |
 | `*.crx`、`*.rar`、`联通网上学院挂课(插件脚本).html` | 离线安装包、旧版打包备份、图文教程 |
-
-## 发布与更新地址
-
-本仓库采用「源文件不带更新地址、需要发布时才注入」的方式，避免开发版和发布版互相覆盖。
-
-- **开发版**（即仓库里的 `unicom-course.user.js`）**不带** `@updateURL` / `@downloadURL`。日常改动通过 `sctl edit` 推送到浏览器里的 ScriptCat 扩展验证，验证通过后再回写仓库。
-- **不使用 `meta.js`**：发布时 `@updateURL` 与 `@downloadURL` 写同一条地址，都指向 Gitee 上的 `.user.js` 本身，不再单独生成元数据文件。
-- **当前不发布**：脚本只由本地 sctl 维护，仓库里没有发布版产物；完整流程见 [发布与更新规范.md](../发布与更新规范.md)。
-- **仓库布局**：GitHub 是主仓库（`coralfox/unicom-tools`），Gitee 是镜像。将来若发布，脚本头部地址**一律写 Gitee**——`raw.githubusercontent.com` 在国内不可达。
-- Gitee 仓库需保持公开；`raw` 请求会 302 跳转到 `raw.giteeusercontent.com`，缓存约 60 秒，改完不会立刻生效。
